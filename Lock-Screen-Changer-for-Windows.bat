@@ -3,7 +3,6 @@ COLOR 0A
 CD /D %~dp0
 IF EXIST image.jpg GOTO LABEL2
 :LABEL1
-ECHO %CD%
 ECHO Welcome to Chiroo's Logon background image changing script (Windows 7)
 ECHO.
 ECHO To use this script, keep a jpg image in the same folder as this and name it as "image.jpg". You will then need to right-click this program and select "Run as Administrator" for it to work correctly
@@ -23,5 +22,9 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V OEMBa
 MD C:\WINDOWS\SYSTEM32\oobe
 MD C:\WINDOWS\SYSTEM32\oobe\info
 MD C:\WINDOWS\SYSTEM32\oobe\info\backgrounds
-COPY /Y image.jpg "C:\WINDOWS\SYSTEM32\oobe\info\backgrounds\backgroundDefault.jpg" || ECHO Some Error Occurred && PAUSE
+COPY /Y image.jpg "C:\WINDOWS\SYSTEM32\oobe\info\backgrounds\backgroundDefault.jpg"
+ECHO.
+IF ERRORLEVEL 0 ECHO Operation Successful
+IF ERRORLEVEL 1 ECHO Some error occurred, Program will now exit
+PAUSE > NUL
 :END
