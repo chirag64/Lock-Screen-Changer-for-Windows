@@ -1,5 +1,5 @@
 @ECHO OFF
-COLOR 0A
+COLOR 1A
 CD /D %~dp0
 IF EXIST image.jpg GOTO LABEL2
 :LABEL1
@@ -17,13 +17,10 @@ PAUSE
 GOTO END
 
 :LABEL2
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background" /V OEMBackground /T REG_DWORD /d 00000001 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V OEMBackground /T REG_DWORD /d 00000001 /f
-MD C:\WINDOWS\SYSTEM32\oobe
-MD C:\WINDOWS\SYSTEM32\oobe\info
-MD C:\WINDOWS\SYSTEM32\oobe\info\backgrounds
-COPY /Y image.jpg "C:\WINDOWS\SYSTEM32\oobe\info\backgrounds\backgroundDefault.jpg"
-ECHO.
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background" /V OEMBackground /T REG_DWORD /d 00000001 /f >NUL 2>&1
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V OEMBackground /T REG_DWORD /d 00000001 /f >NUL 2>&1
+MD C:\WINDOWS\SYSTEM32\oobe\info\backgrounds >NUL 2>&1
+COPY /Y image.jpg "C:\WINDOWS\SYSTEM32\oobe\info\backgrounds\backgroundDefault.jpg" >NUL 2>&1
 IF ERRORLEVEL 0 ECHO Operation Successful
 IF ERRORLEVEL 1 ECHO Some error occurred, Program will now exit
 PAUSE > NUL
