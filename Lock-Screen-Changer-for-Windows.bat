@@ -17,8 +17,8 @@ ECHO Wrong choice && EXIT
 )
 
 :LABEL1
-IF EXIST image.jpg GOTO LABEL3
-IF EXIST image.jpeg GOTO LABEL3
+IF EXIST image.jpg GOTO LABEL2
+IF NOT EXIST image.jpeg GOTO LABEL5
 
 :LABEL2
 ECHO Welcome to Chiroo's Logon background image changing script (Windows 7)
@@ -51,6 +51,12 @@ IF %ERRORLEVEL% EQU 0 ECHO Operation Successful
 IF %ERRORLEVEL% EQU 1 ECHO Some error occurred, Try running the program as Administrator.
 ECHO Program will now exit
 PAUSE > NUL
+
+:LABEL5
+ECHO An error has occurred.
+ECHO Image not found. Please put an image in the program's folder and name it as image.jpg.
+PAUSE > NUL
+GOTO LABEL1
 
 :END
 EXIT
